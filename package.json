@@ -1,8 +1,8 @@
 {
-  "name": "drj-template-site",
+  "name": "painteddesertestates-com",
   "version": "1.0.0",
   "private": true,
-  "description": "Dr. Jan Duffy — Multi-domain real estate template with RealScout integration",
+  "description": "Painted Desert Estates (www.painteddesertestates.com) - Dr. Jan Duffy Las Vegas neighborhood listing site with RealScout integration",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
