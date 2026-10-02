@@ -1,0 +1,124 @@
+import type { Metadata } from 'next';
+import { AGENT } from '@/config/agent';
+import { getDomainConfig } from '@/lib/getDomainConfig';
+import { findNeighborhoodForName } from '@/config/neighborhoods';
+import { getSiteUrl } from '@/lib/siteUrl';
+import { buildPageMetadata } from '@/lib/pageMetadata';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import PageHero from '@/components/PageHero';
+import SellerProcess from '@/components/SellerProcess';
+import SellerCta from '@/components/SellerCta';
+import FaqSection from '@/components/FaqSection';
+import SchemaMarkup from '@/components/SchemaMarkup';
+import { getSellerFaqs } from '@/lib/sellerCopy';
+import { faqH2, sellProcessH1 } from '@/lib/headings';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getDomainConfig();
+  const baseUrl = await getSiteUrl();
+  const place = findNeighborhoodForName(config.neighborhood)?.name ?? config.neighborhood;
+  return buildPageMetadata({
+    title: sellProcessH1(place),
+    description: `The listing process ${AGENT.name} uses to sell homes in ${place} and across Las Vegas neighborhoods: CMA, prep, MLS marketing, offers, and closing. Call ${AGENT.phone}.`,
+    path: '/sell',
+    baseUrl,
+    keywords: [
+      `how to sell a home in ${place}`,
+      'Las Vegas listing process',
+      'home selling steps Las Vegas',
+    ],
+  });
+}
+
+export const revalidate = 3600;
+
+export default async function SellPage() {
+  const config = await getDomainConfig();
+  const place = findNeighborhoodForName(config.neighborhood)?.name ?? config.neighborhood;
+
+  return (
+    <>
+      <SchemaMarkup
+        entities="page"
+        config={config}
+        pageTitle={sellProcessH1(place)}
+        pageDescription={`The listing process ${AGENT.name} uses to sell homes in ${place} and across Las Vegas neighborhoods: CMA, prep, MLS marketing, offers, and closing. Call ${AGENT.phone}.`}
+        path="/sell"
+        breadcrumbs={[
+          { name: 'Sell Your Home', path: '/' },
+          { name: 'How We Sell', path: '/sell' },
+        ]}
+      />
+      <Breadcrumbs
+        items={[
+          { name: 'Sell Your Home', href: '/' },
+          { name: 'How We Sell' },
+        ]}
+      />
+
+      <PageHero
+        title={sellProcessH1(place)}
+        subtitle={`A listing is a neighborhood campaign. We price to ${place} comps, market to buyers already searching that community, and negotiate with the same numbers we used to list.`}
+        neighborhood={place}
+      />
+
+      <section className="section-padding bg-white">
+        <div className="container-narrow mx-auto space-y-8 text-primary-700 leading-relaxed">
+          <h2 className="text-2xl font-display font-bold text-primary-900">
+            What does a successful {place} listing look like?
+          </h2>
+          <p>
+            You close. The recorded sale matches the net-sheet we showed you at listing — or we
+            explain every variance. Until then, your {place} home is priced against live
+            competition, photographed for the filters buyers use, and watched weekly for new
+            listings that could steal your showing.
+          </p>
+          <h2 className="text-2xl font-display font-bold text-primary-900">
+            What does {AGENT.name} not do when listing in {place}?
+          </h2>
+          <p>
+            We do not list at a valley-wide average. We do not upload a generic “Las Vegas luxury
+            living” remark when your buyer is searching {place}. We do not guess a price — if the
+            MLS has not confirmed a number, we say so and pull the file.
+          </p>
+        </div>
+      </section>
+
+      <SellerProcess neighborhood={place} />
+
+      <section className="section-padding bg-white">
+        <div className="container-wide mx-auto">
+          <h2 className="text-2xl font-display font-bold text-primary-900 mb-8 text-center">
+            What happens after you decide to list in {place}?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: `What should be done before listing photos in ${place}?`,
+                desc: `Punch-list ranked by return: paint, landscape, and mechanical items ${place} buyers will flag on the first tour.`,
+              },
+              {
+                title: `What happens during launch week in ${place}?`,
+                desc: 'MLS, portals, neighborhood ads, and broker preview when the product warrants it. Strongest traffic is usually days 1–14.',
+              },
+              {
+                title: `What happens after a ${place} home is under contract?`,
+                desc: 'Inspection credits negotiated with the same comps. We manage the file with the title company through recordation.',
+              },
+            ].map((block) => (
+              <div key={block.title} className="p-6 rounded-xl border border-primary-100">
+                <h3 className="text-xl font-display font-bold text-primary-900 mb-3">
+                  {block.title}
+                </h3>
+                <p className="text-sm text-primary-600">{block.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SellerCta neighborhood={place} />
+      <FaqSection heading={faqH2(place)} faqs={getSellerFaqs(place, config.city)} />
+    </>
+  );
+}

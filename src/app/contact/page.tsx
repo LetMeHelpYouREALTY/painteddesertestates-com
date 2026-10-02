@@ -1,0 +1,203 @@
+import type { Metadata } from 'next';
+import { getDomainConfig } from '@/lib/getDomainConfig';
+import { AGENT } from '@/config/agent';
+import { findNeighborhoodForName, getAllNeighborhoods } from '@/config/neighborhoods';
+import { getSiteUrl } from '@/lib/siteUrl';
+import { buildPageMetadata } from '@/lib/pageMetadata';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import PageHero from '@/components/PageHero';
+import SchemaMarkup from '@/components/SchemaMarkup';
+import { contactH1, officeH2 } from '@/lib/headings';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getDomainConfig();
+  const baseUrl = await getSiteUrl();
+  const place = findNeighborhoodForName(config.neighborhood)?.name ?? config.neighborhood;
+  return buildPageMetadata({
+    title: contactH1(place),
+    description: `Book a ${place} listing consultation or market strategy call with ${AGENT.name}. ${AGENT.brokerage}, ${AGENT.address.full}. Call ${AGENT.phone}. Hours: ${AGENT.hoursDisplay[0].days} ${AGENT.hoursDisplay[0].time}.`,
+    path: '/contact',
+    baseUrl,
+    keywords: [
+      `${place} home valuation`,
+      `list home ${place}`,
+      `contact ${AGENT.name}`,
+    ],
+  });
+}
+
+export const revalidate = 86400;
+
+export default async function ContactPage() {
+  const config = await getDomainConfig();
+  const place = findNeighborhoodForName(config.neighborhood)?.name ?? config.neighborhood;
+  const neighborhoods = getAllNeighborhoods();
+
+  return (
+    <>
+      <SchemaMarkup
+        entities="page"
+        config={config}
+        pageTitle={contactH1(place)}
+        pageDescription={`Book a ${place} listing consultation or market strategy call with ${AGENT.name}. ${AGENT.brokerage}, ${AGENT.address.full}. Call ${AGENT.phone}. Hours: ${AGENT.hoursDisplay[0].days} ${AGENT.hoursDisplay[0].time}.`}
+        path="/contact"
+        breadcrumbs={[
+          { name: 'Sell Your Home', path: '/' },
+          { name: 'Contact', path: '/contact' },
+        ]}
+      />
+      <Breadcrumbs
+        items={[
+          { name: 'Sell Your Home', href: '/' },
+          { name: 'Contact' },
+        ]}
+      />
+
+      <PageHero
+        title={contactH1(place)}
+        subtitle={`Book a listing consultation or market strategy call. We return a ${place} CMA — not a valley-wide guess. Call ${AGENT.phone} if you need a time that is not on the calendar.`}
+        neighborhood={place}
+      />
+
+      <section className="section-padding bg-white">
+        <div className="container-wide mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <div className="lg:col-span-3">
+              <h2 className="text-2xl font-display font-bold text-primary-900 mb-4">
+                How do I book a {place} listing consultation with {AGENT.name}?
+              </h2>
+              <p className="text-primary-600 mb-6 leading-relaxed">
+                There is no contact form on this site. Use the calendars above — listing
+                consultation, 15-minute market strategy, or buyer consult — or call{' '}
+                {AGENT.phone}.
+              </p>
+              <a href="#schedule" className="btn-primary">
+                Jump to calendars
+              </a>
+            </div>
+
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-primary-50 rounded-xl p-6">
+                <h2 className="font-display font-bold text-primary-900 mb-4">
+                  How do I contact {AGENT.name} in Las Vegas?
+                </h2>
+                <div className="space-y-4">
+                  <a
+                    href={`tel:${AGENT.phoneTel}`}
+                    className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow"
+                  >
+                    <div>
+                      <p className="text-xs text-primary-700">Call</p>
+                      <p className="font-semibold text-bhhs-maroon">{AGENT.phone}</p>
+                    </div>
+                  </a>
+                  <a
+                    href={`mailto:${AGENT.email}`}
+                    className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow"
+                  >
+                    <div>
+                      <p className="text-xs text-primary-700">Email</p>
+                      <p className="font-semibold text-bhhs-maroon text-sm">{AGENT.email}</p>
+                    </div>
+                  </a>
+                  <a
+                    href="#listing"
+                    className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow"
+                  >
+                    <div>
+                      <p className="text-xs text-primary-700">Schedule</p>
+                      <p className="font-semibold text-bhhs-maroon">Listing appointment</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div className="bg-primary-50 rounded-xl p-6">
+                <h2 className="font-display font-bold text-primary-900 mb-4">{officeH2()}</h2>
+                <address className="not-italic text-sm text-primary-700 space-y-1 mb-4">
+                  <p className="font-semibold">{AGENT.brokerage}</p>
+                  <p>{AGENT.address.full}</p>
+                </address>
+                <div className="space-y-1 text-sm text-primary-600">
+                  {AGENT.hoursDisplay.map((h) => (
+                    <div key={h.days} className="flex justify-between gap-4">
+                      <span>{h.days}</span>
+                      <span className="font-medium text-primary-800">{h.time}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-xl overflow-hidden border border-primary-100">
+                <iframe
+                  src={AGENT.googleMapsEmbed}
+                  width="100%"
+                  height="250"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`${AGENT.name} office at ${AGENT.address.full}`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <a
+                  href={AGENT.mapsDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-center"
+                >
+                  Directions
+                </a>
+                <a
+                  href={AGENT.googleReviews}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-4 bg-bhhs-cream rounded-xl text-center hover:shadow-md transition-shadow"
+                >
+                  <p className="font-semibold text-primary-900 text-sm">View Google Reviews</p>
+                  <p className="text-xs text-primary-700">Read seller feedback</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="valuation" className="section-padding bg-linear-to-r from-bhhs-maroon to-primary-900">
+        <div className="container-narrow mx-auto text-center">
+          <h2 className="text-3xl font-display font-bold text-white mb-4">
+            What is my {place} home worth this week?
+          </h2>
+          <p className="text-lg text-primary-200 mb-8 max-w-xl mx-auto">
+            A CMA uses closed {place} sales and the actives buyers will tour this weekend.
+            No valley-wide average. Book a listing consultation or call {AGENT.phone}.
+          </p>
+          <a href="#listing" className="btn-gold text-base px-8 py-4">
+            Book listing consultation
+          </a>
+        </div>
+      </section>
+
+      <section className="section-padding bg-white">
+        <div className="container-wide mx-auto">
+          <h2 className="text-2xl font-display font-bold text-primary-900 mb-6">
+            How do I sell a home in another Las Vegas neighborhood?
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {neighborhoods.map((n) => (
+              <a
+                key={n.slug}
+                href={`/neighborhoods/${n.slug}`}
+                className="px-3 py-1 text-sm bg-primary-50 text-primary-700 rounded-full border border-primary-100 hover:border-bhhs-maroon"
+              >
+                {n.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
