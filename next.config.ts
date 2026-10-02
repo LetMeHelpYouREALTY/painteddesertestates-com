@@ -70,8 +70,8 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://em.realscout.com https://www.realscout.com https://*.realscout.com https://assets.calendly.com https://calendly.com https://*.calendly.com https://vercel.live",
-              "connect-src 'self' https://em.realscout.com https://www.realscout.com https://*.realscout.com wss://*.realscout.com https://calendly.com https://*.calendly.com https://vercel.live",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://em.realscout.com https://www.realscout.com https://*.realscout.com https://assets.calendly.com https://calendly.com https://*.calendly.com https://vercel.live https://va.vercel-scripts.com",
+              "connect-src 'self' https://em.realscout.com https://www.realscout.com https://*.realscout.com wss://*.realscout.com https://calendly.com https://*.calendly.com https://vercel.live https://va.vercel-scripts.com https://vitals.vercel-insights.com",
               "img-src 'self' data: blob: https:",
               "style-src 'self' 'unsafe-inline' https://em.realscout.com https://assets.calendly.com",
               "font-src 'self' data: https:",
