@@ -1,4 +1,4 @@
-# Dr. Duffy Sells Homes
+# Painted Desert Estates (www.painteddesertestates.com)
 
 Next.js 15 site that lists and sells homes **neighborhood by neighborhood** across the Las Vegas Valley. One deployment serves multiple hostnames; each request resolves the community, then every page and section is written as seller representation — CMA, listing launch, competing inventory — not a generic buyer search template.
 
