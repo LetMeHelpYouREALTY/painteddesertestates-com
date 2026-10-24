@@ -16,9 +16,7 @@ export default function Footer({ config }: { config: DomainConfig }) {
             </p>
             <p className="text-sm text-primary-300 mb-1">{AGENT.title}</p>
             <p className="text-sm text-primary-300 mb-4">
-              {AGENT.brokerage}
-              <br />
-              License: {AGENT.license}
+              Berkshire Hathaway HomeServices Nevada Properties since September 2008 · License {AGENT.license}
             </p>
 
             <address className="not-italic text-sm text-primary-300 space-y-1">
@@ -138,7 +136,7 @@ export default function Footer({ config }: { config: DomainConfig }) {
         <div className="container-wide mx-auto px-4 sm:px-6 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-primary-400">
             <p>
-              &copy; {year} {AGENT.name}. All rights reserved. {AGENT.brokerageShort}.
+              &copy; {year} {AGENT.name}. All rights reserved.
             </p>
             <p>
               Selling homes in {config.neighborhood} | {config.city}, {config.state}{' '}

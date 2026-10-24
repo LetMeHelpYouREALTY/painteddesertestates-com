@@ -40,7 +40,7 @@ export const DEFAULT_CONFIG: DomainConfig = {
   state: 'NV',
   zip: '89149',
   description:
-    'Sell your Las Vegas home with Dr. Jan Duffy, REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. Neighborhood listing plans for Summerlin, Skye Canyon, Henderson, Centennial Hills, and every major valley community.',
+    'Sell your Las Vegas home with Dr. Jan Duffy, REALTOR®. Neighborhood listing plans for Summerlin, Skye Canyon, Henderson, Centennial Hills, and every major valley community.',
   keywords: [
     'sell home Las Vegas',
     'Las Vegas listing agent',
@@ -310,7 +310,7 @@ export const DOMAIN_MAP: Record<string, Partial<DomainConfig>> = {
     keywords: ['Dr Jan Duffy', 'Las Vegas realtor', 'ask a realtor'],
     focus: 'general',
     heroTitle: 'Ask Dr. Jan Duffy',
-    heroSubtitle: 'Your real estate questions answered by a trusted Las Vegas expert with 20+ years of experience.',
+    heroSubtitle: 'Your real estate questions answered by a trusted Las Vegas expert in real estate since 1983.',
   },
 
   'calldrboyle.com': {

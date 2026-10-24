@@ -4,7 +4,7 @@
  */
 export const AGENT = {
   name: 'Dr. Jan Duffy',
-  fullName: 'Dr. Jan Duffy, PhD',
+  fullName: 'Dr. Jan Duffy, Ph.D.',
   title: 'REALTOR® | Luxury Home Specialist',
   license: 'S.0197614.LLC',
   brokerage: 'Berkshire Hathaway HomeServices Nevada Properties',
@@ -61,12 +61,12 @@ export const AGENT = {
 
   // Bio
   shortBio:
-    'With over 20 years of experience in the Las Vegas luxury real estate market, Dr. Jan Duffy brings unmatched expertise, market knowledge, and personalized service to every client.',
+    'In real estate since 1983, Dr. Jan Duffy brings unmatched expertise, market knowledge, and personalized service to every client.',
   credentials: [
-    'PhD Researcher',
+    'Ph.D. in Research',
     'Certified Luxury Home Marketing Specialist (CLHMS)',
-    'Over $500M in career sales',
-    'Top 1% of Las Vegas REALTORS®',
-    'Berkshire Hathaway HomeServices Chairman\'s Circle',
+    '$127M+ in career sales',
+    'Top 1% Las Vegas REALTOR®',
+    'Chairman\'s Circle',
   ],
 } as const;
