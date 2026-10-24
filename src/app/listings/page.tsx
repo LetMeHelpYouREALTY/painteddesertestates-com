@@ -57,6 +57,7 @@ export default async function ListingsPage() {
       />
 
       <PageHero
+        page="listings"
         title={listingsH1(place)}
         subtitle={`Live MLS inventory is the set buyers will compare to your ${place} home. We use it for your list price, not a Las Vegas Valley average.`}
         neighborhood={place}

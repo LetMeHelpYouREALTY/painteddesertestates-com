@@ -54,6 +54,7 @@ export default async function NeighborhoodsIndexPage() {
       />
 
       <PageHero
+        page="neighborhoods"
         title={neighborhoodsIndexH1()}
         subtitle="Buyers search by community — Summerlin villages, Skye Canyon, Centennial Hills, Henderson master plans, North Las Vegas parks. We list that way. Pick your neighborhood for a selling plan written to that map."
         neighborhood="Las Vegas Valley"

@@ -8,6 +8,8 @@ type PageHeroProps = {
   eyebrow?: string;
   align?: 'center' | 'left';
   neighborhood: string;
+  /** utm_campaign for the Calendly embeds — the page path without the leading slash. */
+  page?: string;
   children?: ReactNode;
 };
 
@@ -21,6 +23,7 @@ export default function PageHero({
   eyebrow,
   align = 'center',
   neighborhood,
+  page,
   children,
 }: PageHeroProps) {
   const centered = align === 'center';
@@ -48,7 +51,7 @@ export default function PageHero({
         </div>
       </section>
       <RealScoutCarousel neighborhood={neighborhood} />
-      <CalendlyWidgets />
+      <CalendlyWidgets page={page} />
     </>
   );
 }

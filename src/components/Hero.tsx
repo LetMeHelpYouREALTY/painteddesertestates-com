@@ -102,7 +102,7 @@ export default function Hero({
       </div>
     </section>
       <RealScoutCarousel neighborhood={place} />
-      <CalendlyWidgets />
+      <CalendlyWidgets page="home" />
     </>
   );
 }
