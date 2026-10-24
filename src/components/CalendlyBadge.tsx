@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { CALENDLY_LISTING_URL } from '@/config/calendly';
+import { calendlyUrl, campaignForPath } from '@/config/calendly';
+import { usePathname } from 'next/navigation';
 
 type CalendlyApi = {
   initBadgeWidget: (options: {
@@ -23,7 +24,11 @@ function getCalendly(): CalendlyApi | undefined {
  * Calendly pop-up badge (floating button) on every page.
  */
 export default function CalendlyBadge() {
+  const pathname = usePathname() || '/';
+
   useEffect(() => {
+    // Rebuild the badge on route change so its utm_campaign matches the page.
+    document.querySelector('.calendly-badge-widget')?.remove();
     const start = Date.now();
     const timer = window.setInterval(() => {
       if (document.querySelector('.calendly-badge-widget')) {
@@ -33,7 +38,7 @@ export default function CalendlyBadge() {
       const calendly = getCalendly();
       if (calendly) {
         calendly.initBadgeWidget({
-          url: CALENDLY_LISTING_URL,
+          url: calendlyUrl('listing-consultation', 'badge', campaignForPath(pathname)),
           text: 'Schedule with Dr. Duffy',
           color: '#6a1b4d',
           textColor: '#ffffff',
@@ -48,12 +53,14 @@ export default function CalendlyBadge() {
     }, 250);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [pathname]);
 
   return null;
 }
 
-export function openCalendlyPopup(url: string = CALENDLY_LISTING_URL): void {
+export function openCalendlyPopup(
+  url: string = calendlyUrl('listing-consultation', 'popup', campaignForPath(window.location.pathname)),
+): void {
   const calendly = getCalendly();
   if (calendly) {
     calendly.initPopupWidget({ url });

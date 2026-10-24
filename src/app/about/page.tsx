@@ -55,6 +55,7 @@ export default async function AboutPage() {
       />
 
       <PageHero
+        page="about"
         title={aboutH1(place)}
         subtitle={`Listing representation for ${place} and every major Las Vegas Valley neighborhood — Summerlin villages to Henderson master plans.`}
         neighborhood={place}

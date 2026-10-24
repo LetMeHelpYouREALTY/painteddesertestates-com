@@ -54,6 +54,7 @@ export default async function ContactPage() {
       />
 
       <PageHero
+        page="contact"
         title={contactH1(place)}
         subtitle={`Book a listing consultation or market strategy call. We return a ${place} CMA — not a valley-wide guess. Call ${AGENT.phone} if you need a time that is not on the calendar.`}
         neighborhood={place}

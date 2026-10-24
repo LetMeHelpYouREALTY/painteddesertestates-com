@@ -35,7 +35,7 @@ export default function NotFound() {
         </div>
       </section>
       <RealScoutCarousel neighborhood="Las Vegas" />
-      <CalendlyWidgets />
+      <CalendlyWidgets page="not-found" />
     </>
   );
 }

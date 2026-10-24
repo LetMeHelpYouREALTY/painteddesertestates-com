@@ -57,6 +57,7 @@ export default async function SellPage() {
       />
 
       <PageHero
+        page="sell"
         title={sellProcessH1(place)}
         subtitle={`A listing is a neighborhood campaign. We price to ${place} comps, market to buyers already searching that community, and negotiate with the same numbers we used to list.`}
         neighborhood={place}

@@ -96,6 +96,7 @@ export default async function NeighborhoodPage({ params }: PageProps) {
       />
 
       <PageHero
+        page={`neighborhoods/${neighborhood.slug}`}
         align="left"
         eyebrow={`${neighborhood.city}, NV ${neighborhood.zip} · Listing plan`}
         title={sellerH1(neighborhood.name, neighborhood.city)}

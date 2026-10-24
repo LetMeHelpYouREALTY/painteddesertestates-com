@@ -5,8 +5,29 @@ export const CALENDLY_WIDGET_CSS =
 export const CALENDLY_PRIMARY_COLOR = '6a1b4d';
 export const CALENDLY_USER = 'https://calendly.com/drjanduffy';
 
+/**
+ * Booking URL with UTM tags. utm_source = bare domain so the Calendly → FUB
+ * worker can attribute the booking; utm_campaign = page path ("home" for /).
+ */
+export function calendlyUrl(slug: string, medium = 'inline', campaign = 'site'): string {
+  const params = new URLSearchParams({
+    hide_gdpr_banner: '1',
+    primary_color: CALENDLY_PRIMARY_COLOR,
+    utm_source: 'painteddesertestates.com',
+    utm_medium: medium,
+    utm_campaign: campaign,
+  });
+  return `${CALENDLY_USER}/${slug}?${params.toString()}`;
+}
+
+/** utm_campaign value for a pathname. */
+export function campaignForPath(pathname: string): string {
+  const path = pathname.replace(/^\/|\/$/g, '');
+  return path || 'home';
+}
+
 function embedUrl(slug: string): string {
-  return `${CALENDLY_USER}/${slug}?hide_gdpr_banner=1&primary_color=${CALENDLY_PRIMARY_COLOR}`;
+  return calendlyUrl(slug);
 }
 
 export const CALENDLY_WIDGETS = [

@@ -1,12 +1,12 @@
 import { AGENT } from '@/config/agent';
-import { CALENDLY_WIDGETS } from '@/config/calendly';
+import { CALENDLY_WIDGETS, calendlyUrl } from '@/config/calendly';
 import { scheduleH2 } from '@/lib/headings';
 
 /**
  * All three Calendly event widgets — listing, market strategy, buyer.
  * Iframes so Next.js server components do not need React state.
  */
-export default function CalendlyWidgets() {
+export default function CalendlyWidgets({ page = 'site' }: { page?: string }) {
   return (
     <section
       id="schedule"
@@ -39,7 +39,7 @@ export default function CalendlyWidgets() {
                 {widget.description}
               </p>
               <iframe
-                src={widget.url}
+                src={calendlyUrl(widget.slug, 'inline', page)}
                 title={`${widget.title} with ${AGENT.name}`}
                 className="w-full min-h-[700px] rounded-xl border border-primary-100"
                 width={400}
