@@ -310,7 +310,7 @@ export const DOMAIN_MAP: Record<string, Partial<DomainConfig>> = {
     keywords: ['Dr Jan Duffy', 'Las Vegas realtor', 'ask a realtor'],
     focus: 'general',
     heroTitle: 'Ask Dr. Jan Duffy',
-    heroSubtitle: 'Your real estate questions answered by a trusted Las Vegas expert in real estate since 1983.',
+    heroSubtitle: 'Your real estate questions answered by a trusted Las Vegas expert licensed since 2008 · 35 years in Las Vegas.',
   },
 
   'calldrboyle.com': {
