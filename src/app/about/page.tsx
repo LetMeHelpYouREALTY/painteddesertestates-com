@@ -108,7 +108,7 @@ export default async function AboutPage() {
                 Who is {AGENT.fullName}, REALTOR® in Las Vegas?
               </h2>
               <p className="text-sm text-bhhs-maroon font-semibold mb-6">
-                {AGENT.title} | Top 1% Las Vegas REALTOR®
+                {AGENT.title} | Las Vegas REALTOR®
               </p>
 
               <div className="space-y-4 text-primary-700">
@@ -120,7 +120,7 @@ export default async function AboutPage() {
                   home is live.
                 </p>
                 <p>
-                  In real estate since 1983, Dr. Duffy pairs that neighborhood listing
+                  Licensed since 2008 · 35 years in Las Vegas, Dr. Duffy pairs that neighborhood listing
                   work with a national referral network — useful when the buyer for your{' '}
                   {place} home is relocating, not already on your street.
                 </p>

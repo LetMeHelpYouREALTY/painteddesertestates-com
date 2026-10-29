@@ -61,12 +61,12 @@ export const AGENT = {
 
   // Bio
   shortBio:
-    'In real estate since 1983, Dr. Jan Duffy brings unmatched expertise, market knowledge, and personalized service to every client.',
+    'Licensed since 2008 · 35 years in Las Vegas, Dr. Jan Duffy brings unmatched expertise, market knowledge, and personalized service to every client.',
   credentials: [
     'Ph.D. in Research',
     'Certified Luxury Home Marketing Specialist (CLHMS)',
     '$127M+ in career sales',
-    'Top 1% Las Vegas REALTOR®',
+    'Las Vegas REALTOR®',
     'Chairman\'s Circle',
   ],
 } as const;
