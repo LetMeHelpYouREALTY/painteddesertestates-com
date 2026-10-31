@@ -14,6 +14,8 @@ import { getSellerHero } from '@/lib/sellerCopy';
 import { REALSCOUT_SCRIPT_SRC } from '@/components/RealScoutWidget';
 import CalendlyBadge from '@/components/CalendlyBadge';
 import { CALENDLY_SCRIPT_SRC, CALENDLY_WIDGET_CSS } from '@/config/calendly';
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
+import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/next";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -153,6 +155,8 @@ e.parentNode.insertBefore(t,e);})
 window.widgetTracker("create", "WT-XQHVYQWW");
 window.widgetTracker("send", "pageview");}
         `}</Script>
+  <VercelAnalytics />
+  <VercelSpeedInsights />
 </body>
     </html>
   );
